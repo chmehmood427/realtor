@@ -62,8 +62,8 @@
 	$response['foundation'] = $property_result['foundation']; 
 	$response['walkingScore'] = $property_result['walking_score'];
 	
+	//images
 	$response['images'] = array(); 
-	// $response['rooms'] = array(); 
 	
 	//traversing through all the rows for images
 	while($row = mysqli_fetch_array($image_result)){
@@ -71,23 +71,14 @@
 		$temp['id']=$row['property_id'];
 		$temp['name']=$row['image_name'];
 		array_push($response['images'],$temp);
-		// $temp['type']=$row['room_type'];
-		// $temp['level']=$row['room_level'];
-		// $temp['dimensions']=$row['dimensions'];
-		//array_push($response['rooms'],$temp);
 	}
 	
-	// $response['images'] = array(); 
+	//rooms
 	$response['rooms'] = array(); 
 	
 	//traversing through all the rows for rooms
 	while($row = mysqli_fetch_array($room_result)){
 		$temp = array(); 
-		// $temp['id']=$row['property_id'];
-		// $temp['address']=$row['address'];
-		// $temp['price']=$row['listing_price'];
-		// //$temp['url']=$row['url'];
-		// array_push($response['images'],$temp);
 		$temp['type']=$row['room_type'];
 		$temp['level']=$row['room_level'];
 		$temp['dimensions']=$row['dimensions'];
