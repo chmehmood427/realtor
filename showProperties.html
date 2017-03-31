@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+	<div ng-app="myApp" ng-controller="myCtrl">
+		
+		<table>
+			<tr>
+				<th>Picture</th> <th>Address</th> <th>Price</th> <th>Style</th>
+			</tr>
+			<tr ng-repeat="x in records">
+				<td><a href="property/property.html?MLS={{x.id}}"> <img ng-src="{{'./images/res/' + x.id + '/image-' + x.id + '-1.jpg'}}" height= "42" width = "42"> </a></td>
+				<!-- <td>{{x.id}}</td> -->
+				<td>{{x.address}}</td>
+				<td>{{x.price}}</td>
+				<td>{{x.style}}</td>
+				<!-- The bnelow is a working line -->
+				<!-- <td><img ng-src="{{x.url}}" height= "42" width = "42"></td> -->
+				<!-- <td><a href="property/property.html?MLS={{x.id}}"> <img ng-src="{{'./images/res/' + x.id + '/image-' + x.id + '-1.jpg'}}" height= "42" width = "42"> </a></td> -->
+
+			</tr>
+		</table>
+		
+	</div>
+
+	<script>
+		var app= angular.module("myApp", []);
+		app.controller("myCtrl", function($scope, $http){
+			$http.get("getProperties.php")
+			.then(function(response){
+				$scope.records=response.data.images;
+				
+			});
+		});
+	</script>
+</body>

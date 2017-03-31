@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+	
+	<div ng-app="myApp" ng-controller="myCtrl">
+		MLS®: {{p.mlsNo}}
+		For {{p.propertyFor}} : {{p.price}}
+		<br/>
+		Address: {{p.address}} <br/>
+		Property Type: {{p.propertyType}} <br/>
+		Bedrooms: {{p.bedrooms}} <br/>
+		Bathrooms: {{p.bathrooms}} <br/>
+		Taxes: {{p.taxes}} for {{p.taxesYear}} <br/>
+		Walking Score: {{p.walkingScore}} <br/>
+		<br/>
+		Description: <br/> {{p.description}} <br/>
+		<br/> 
+		Property: <br/>
+		Amenities Nearby: {{p.amenities}} <br/>
+		Parking Type: {{p.parking}} <br/>
+		<br/>
+		<br/>
+		
+		Building: <br/>
+		<table>
+			<tr>
+				<td>Heating Type: {{p.heating}}</td>
+				<td>Style: {{p.style}}</td>
+			</tr>
+			<tr>
+				<td>Building Type: {{p.buildingType}}</td>
+				<td>Flooring: {{p.flooring}}</td>
+			</tr>
+			<tr>
+				<td>Exterior Finish: {{p.exterior}}</td>
+				<td>Water: {{p.water}}</td>
+			</tr>
+			<tr>
+				<td>Foundation: {{p.foundation}}</td>
+				<td>Sewarage: {{p.sewarage}}</td>
+			</tr>
+			<!-- <tr ng-repeat="x in records"> -->
+				
+				<!-- <td>{{x.id}}</td> -->
+				<!-- <td>{{x.address}}</td> -->
+				<!-- <td>{{x.price}}</td> -->
+				<!-- The bnelow is a working line -->
+				<!-- <td><img ng-src="{{x.url}}" height= "42" width = "42"></td> -->
+				<td><img ng-src="{{'../images/res/' + x.id + '/image-' + x.id + '-1.jpg'}}" height= "42" width = "42"></td>
+
+			<!-- </tr> -->
+		</table>
+		<br/>
+		<table>
+			<tr>
+				<th>Type</th> <th>Level</th> <th>Dimensions</th> 
+			</tr>
+			<tr ng-repeat="x in p.rooms">
+				
+				<td>{{x.type}}</td>
+				<td>{{x.level}}</td>
+				<td>{{x.dimensions}}</td>
+				<!-- The bnelow is a working line -->
+				<!-- <td><img ng-src="{{x.url}}" height= "42" width = "42"></td> -->
+				<!-- <td><img ng-src="{{'../images/res/' + x.id + '/image-' + x.id + '-1.jpg'}}" height= "42" width = "42"></td> -->
+
+			</tr>
+		</table>
+		<div ng-repeat="x in p.images"> <img ng-src="{{'../images/res/' + x.id + '/' + x.name}}" height= "42" width = "42"> </div>
+		<!-- <img src="../images/res/2/"> -->
+		<!-- image-1-1.jpg -->
+	</div>
+
+	<script>
+	  //function processForm()
+	  //{
+		var parameters = location.search.substring(1).split("&");
+		//var temp = parameters[0].split("=");
+		//l = unescape(temp[1]);
+		//alert(parameters[0]); //Dialog with the text you put on the textbox
+	  //}
+	  //processForm();
+		var app= angular.module("myApp", []);
+		app.controller("myCtrl", function($scope, $http){
+			$http.get("getProperty.php?" + parameters[0])
+			.then(function(response){
+				<!-- $scope.records=response.data.images; -->
+				//$scope.records=response.data.rooms;
+				//$scope.errorstatus=response.data.error;
+				$scope.p=response.data;
+			});
+		});
+		
+	</script>
+</body>
